@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   end
 
 private
+
   def item_params
     params.require(:item).permit(:name, :grams, :owned)
   end

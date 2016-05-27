@@ -6,7 +6,7 @@
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
-  handleSubmit: (e)->
+  handleSubmit: (e) ->
     e.preventDefault()
     $.post '', { item: @state }, (data) =>
       @props.handleNewItem data
