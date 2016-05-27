@@ -1,0 +1,2 @@
+vendor/assets/javascripts/**.js
+app/assets/javascripts/generated/*
