@@ -3,20 +3,25 @@
     name: ''
     grams: ''
     owned: false
+
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
+
   handleChecked: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.checked
   handleSubmit: (e) ->
+
     e.preventDefault()
     $.post '', { item: @state }, (data) =>
       @props.handleNewItem data
       @setState @getInitialState()
     , 'JSON'
+
   valid: ->
     @state.name && (@state.grams >= 0 || !@state.grams)
+
   render: ->
     React.DOM.form
       className: 'form'
