@@ -42,10 +42,15 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
     arel (7.0.0)
+    autoprefixer-rails (6.3.6.1)
+      execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -185,6 +190,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bootstrap-sass
   coffee-rails (~> 4.1.0)
   dotenv-rails
   haml-rails
