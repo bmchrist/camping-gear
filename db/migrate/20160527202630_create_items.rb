@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.0]
     create_table :items do |t|
       t.string :name
       t.integer :grams
-      t.boolean :owned
+      t.boolean :owned, default: false, null: false
 
       t.timestamps
     end

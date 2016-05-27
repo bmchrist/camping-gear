@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20160527202630) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.integer  "grams"
-    t.boolean  "owned"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "owned",      default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
