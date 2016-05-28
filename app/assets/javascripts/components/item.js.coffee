@@ -1,10 +1,4 @@
 @Item = React.createClass
-  displayOwnedStatus: (val) ->
-    if val
-      "Yes"
-    else
-      "No"
-
   handleEdit: (e) ->
     @props.handleEditItem @props.item
 
@@ -25,7 +19,7 @@
     React.DOM.tr null,
       React.DOM.td null, @props.item.name
       React.DOM.td null, @props.item.grams
-      React.DOM.td null, @displayOwnedStatus(@props.item.owned)
+      React.DOM.td null, if @props.item.owned then 'yes' else 'no'
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-danger'

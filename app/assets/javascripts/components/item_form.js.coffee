@@ -5,6 +5,9 @@
     grams: @props.item.grams
     owned: @props.item.owned || false
 
+  getDefaultProps: ->
+    item: {}
+
   editing: ->
     !!@state.id
 
@@ -79,7 +82,7 @@
               id: 'owned'
               type: 'checkbox'
               name: 'owned'
-              value: @state.owned
+              checked: @state.owned
               onClick: @handleChecked
       React.DOM.td null,
         if @editing()
