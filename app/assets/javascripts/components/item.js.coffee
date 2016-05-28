@@ -5,14 +5,21 @@
     else
       "No"
 
+  handleEdit: (e) ->
+    @props.handleEditItem @props.item
+
+  handleCancel: (e) ->
+    @props.handleCancelEditing()
+
   handleDelete: (e) ->
     e.preventDefault()
-    $.ajax
-      method: 'DELETE'
-      url: "/items/#{ @props.item.id }"
-      dataType: 'JSON'
-      success: () =>
-        @props.handleDeleteItem @props.item
+    if confirm("Are you sure you want to delete this?")
+      $.ajax
+        method: 'DELETE'
+        url: "/items/#{ @props.item.id }"
+        dataType: 'JSON'
+        success: () =>
+          @props.handleDeleteItem @props.item
 
   render: ->
     React.DOM.tr null,
@@ -24,3 +31,7 @@
           className: 'btn btn-danger'
           onClick: @handleDelete
           'Delete'
+        React.DOM.a
+          className: 'btn btn-primary'
+          onClick: @handleEdit
+          'Edit'
