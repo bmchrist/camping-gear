@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.all.order(:category, 'owned DESC', :name)
   end
 
   def create
@@ -31,6 +31,6 @@ class ItemsController < ApplicationController
 private
 
   def item_params
-    params.require(:item).permit(:name, :grams, :owned)
+    params.require(:item).permit(:name, :grams, :owned, :category)
   end
 end

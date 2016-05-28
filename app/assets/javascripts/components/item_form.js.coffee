@@ -1,8 +1,9 @@
 @ItemForm = React.createClass
   getInitialState: ->
     id: @props.item.id
-    name: @props.item.name
-    grams: @props.item.grams
+    name: @props.item.name || ''
+    category: @props.item.category || ''
+    grams: @props.item.grams || ''
     owned: @props.item.owned || false
 
   getDefaultProps: ->
@@ -41,7 +42,7 @@
     @props.handleCancelEditing()
 
   valid: ->
-    @state.name && (@state.grams >= 0 || !@state.grams)
+    @state.name && (@state.grams >= 0 || !@state.grams) && @state.owned != null
 
   render: ->
     React.DOM.tr null,
@@ -76,6 +77,17 @@
       React.DOM.td null,
         React.DOM.div
           className: 'form-group'
+          React.DOM.input
+            id: 'category'
+            type: 'text'
+            className: 'form-control'
+            placeholder: 'Category'
+            name: 'category'
+            value: @state.category
+            onChange: @handleChange
+      React.DOM.td null,
+        React.DOM.div
+          className: 'form-group'
           React.DOM.label
             htmlFor: 'owned'
             React.DOM.input
@@ -83,16 +95,18 @@
               type: 'checkbox'
               name: 'owned'
               checked: @state.owned
-              onClick: @handleChecked
+              onChange: @handleChecked
       React.DOM.td null,
         if @editing()
           [
             React.DOM.a
+              key: "update"
               className: 'btn btn-primary'
               onClick: @handleUpdate
               disabled: !@valid()
               'Update'
             React.DOM.a
+              key: "cancel"
               className: 'btn btn-default'
               onClick: @handleCancel
               disabled: !@valid()
@@ -100,6 +114,7 @@
           ]
         else
           React.DOM.button
+            key: "add"
             type: 'submit'
             className: 'btn btn-success'
             onClick: @handleSubmit
