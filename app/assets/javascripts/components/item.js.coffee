@@ -18,7 +18,7 @@
         method: 'DELETE'
         url: "/items/#{ @props.item.id }"
         dataType: 'JSON'
-        success: () =>
+        success: =>
           @props.handleDeleteItem @props.item
 
   render: ->
