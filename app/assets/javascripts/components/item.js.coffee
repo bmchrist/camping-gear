@@ -2,6 +2,11 @@
   handleEdit: (e) ->
     @props.handleEditItem @props.item
 
+  convertWeight: (grams, desiredFormat) ->
+    switch(desiredFormat)
+      when "grams" then grams
+      when "kilograms" then (grams/1000)
+
   handleCancel: (e) ->
     @props.handleCancelEditing()
 
@@ -18,7 +23,8 @@
   render: ->
     React.DOM.tr null,
       React.DOM.td null, @props.item.name
-      React.DOM.td null, @props.item.grams
+      React.DOM.td null,
+        "#{@props.item.grams}g - #{@convertWeight(@props.item.grams, "kilograms")}kg"
       React.DOM.td null, if @props.item.owned then 'yes' else 'no'
       React.DOM.td null,
         React.DOM.a
