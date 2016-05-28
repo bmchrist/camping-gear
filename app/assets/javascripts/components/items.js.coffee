@@ -3,8 +3,8 @@
     items: @props.data
     editingItemId: null
 
-  #getDefaultProps: ->
-    #items: []
+  getDefaultProps: ->
+    items: []
 
   setEditing: (item) ->
     @setState editingItemId: item.id
@@ -49,4 +49,4 @@
               React.createElement ItemForm, key: item.id, handleUpdateItem: @updateItem, item: item, handleCancelEditing: @cancelEditing
             else
               React.createElement Item, key: item.id, item: item, handleDeleteItem: @deleteItem, handleEditItem: @setEditing
-          React.createElement ItemForm, handleNewItem: @addItem, item: {}
+          React.createElement ItemForm, handleNewItem: @addItem
