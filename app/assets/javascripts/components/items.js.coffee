@@ -2,9 +2,10 @@
   getInitialState: ->
     items: @props.data
     editingItemId: null
+    filterData: {}
 
   getDefaultProps: ->
-    items: []
+    data: []
 
   setEditing: (item) ->
     @setState editingItemId: item.id
@@ -21,7 +22,7 @@
     items = @state.items.slice()
     index = items.indexOf item
     items.splice index, 1
-    @replaceState items: items
+    @setState items: items
 
   updateItem: (props) ->
     items = @state.items.slice()
@@ -29,12 +30,15 @@
     items[index] = props.new
     @replaceState editingItemId: null, items: items
 
+  handleFilterChange: (filter, value) ->
+    filterData = @state.filterData
+    filterData[filter] = value
+    @setState filterData: filterData
+
   render: ->
     React.DOM.div
       className: 'items'
-      React.DOM.h2
-        className: 'title'
-        'Items'
+      React.createElement ItemsFilters, filterData: @state.filterData, handleFilterChange: @handleFilterChange
       React.DOM.table
         className: 'table table-bordered'
         React.DOM.thead null,
@@ -45,6 +49,8 @@
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for item in @state.items
+            if !!@state.filterData.owned and !item.owned
+              continue
             if item.id == @state.editingItemId
               React.createElement ItemForm, key: item.id, handleUpdateItem: @updateItem, item: item, handleCancelEditing: @cancelEditing
             else
