@@ -2,7 +2,29 @@
   getInitialState: ->
     items: @props.data
     editingItemId: null
-    filterData: {}
+    filterData: {
+      ownedOnly: false
+      category: null
+    }
+
+  categories: ->
+    categories = []
+    for item in @state.items
+      if item.category not in categories
+        categories.push(item.category)
+    categories
+
+  totalGrams: ->
+    weight = 0
+    for item in @filteredItems()
+      continue if isNaN(item.grams)
+      weight = weight + item.grams
+    weight
+
+  filteredItems: ->
+    @state.items.filter (item) =>
+      (!@state.filterData.ownedOnly or item.owned) and
+        (!@state.filterData.category or item.category == @state.filterData.category)
 
   getDefaultProps: ->
     data: []
@@ -28,7 +50,7 @@
     items = @state.items.slice()
     index = items.indexOf props.original
     items[index] = props.new
-    @replaceState editingItemId: null, items: items
+    @setState editingItemId: null, items: items
 
   handleFilterChange: (filter, value) ->
     filterData = @state.filterData
@@ -38,19 +60,25 @@
   render: ->
     React.DOM.div
       className: 'items'
-      React.createElement ItemsFilters, filterData: @state.filterData, handleFilterChange: @handleFilterChange
+      React.createElement ItemsFilters,
+        filterData: @state.filterData,
+        handleFilterChange: @handleFilterChange,
+        allowedCategories: @categories()
+      React.createElement "p", null,
+        "#{Helpers.convertWeight(@totalGrams(), "kilograms")} kg"
+      React.createElement "p", null,
+        "#{Helpers.convertWeight(@totalGrams(), "pounds")} pounds"
       React.DOM.table
         className: 'table table-bordered'
         React.DOM.thead null,
           React.DOM.tr null,
             React.DOM.th null, 'Name'
             React.DOM.th null, 'Weight (Grams)'
+            React.DOM.th null, 'Category'
             React.DOM.th null, 'Owned?'
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,
-          for item in @state.items
-            if !!@state.filterData.owned and !item.owned
-              continue
+          for item in @filteredItems()
             if item.id == @state.editingItemId
               React.createElement ItemForm, key: item.id, handleUpdateItem: @updateItem, item: item, handleCancelEditing: @cancelEditing
             else
