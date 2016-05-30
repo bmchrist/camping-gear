@@ -2,10 +2,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order(:category, 'owned DESC', :name)
 
-    respond_to do |format|
-      format.html
-      format.json { render json: { items: @items } }
-    end
+    render json: @items
   end
 
   def create

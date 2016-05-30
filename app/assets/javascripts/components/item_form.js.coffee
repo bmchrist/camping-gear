@@ -32,7 +32,7 @@
 
   handleSubmit: (e) ->
     e.preventDefault()
-    $.post '', { item: @state }, (data) =>
+    $.post '/items', { item: @state }, (data) =>
       @props.handleNewItem data
       @setState @getInitialState()
     , 'JSON'

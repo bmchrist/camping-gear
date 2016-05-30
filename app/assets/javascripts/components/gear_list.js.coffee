@@ -1,24 +1,15 @@
 @GearList = React.createClass
+  mixins: [Mixins.AjaxLoader]
+  ajaxLoaderResultsVariable: "items"
+  source: "/items"
+
   getInitialState: ->
-    loading: true
     items: []
     editingItemId: null
     filterData: {
       ownedOnly: false
       category: null
     }
-
-  componentDidMount: ->
-    # TODO: one day have this check cache and only load if cache is outdated
-    @serverRequest = $.getJSON(this.props.source, (results) =>
-      @setState(
-        items: results.items,
-        loading: false
-      )
-    )
-
-  componentWillUnmount: ->
-    @serverRequest.abort()
 
   categories: ->
     categories = []
@@ -38,9 +29,6 @@
     @state.items.filter (item) =>
       (!@state.filterData.ownedOnly or item.owned) and
         (!@state.filterData.category or item.category == @state.filterData.category)
-
-  getDefaultProps: ->
-    data: []
 
   setEditing: (item) ->
     @setState editingItemId: item.id
