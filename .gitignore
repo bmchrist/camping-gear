@@ -18,3 +18,5 @@
 !/tmp/.keep
 
 .env
+
+.DS_Store
