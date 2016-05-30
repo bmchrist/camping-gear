@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order(:category, 'owned DESC', :name)
 
-    render json: { items: @items }
+    render json: @items
   end
 
   def create
