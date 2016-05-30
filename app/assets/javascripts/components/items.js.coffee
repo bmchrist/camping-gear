@@ -1,11 +1,24 @@
 @Items = React.createClass
   getInitialState: ->
-    items: @props.data
+    loading: true
+    items: []
     editingItemId: null
     filterData: {
       ownedOnly: false
       category: null
     }
+
+  componentDidMount: ->
+    # TODO: one day have this check cache and only load if cache is outdated
+    @serverRequest = $.getJSON(this.props.source, (results) =>
+      @setState(
+        items: results.items,
+        loading: false
+      )
+    )
+
+  componentWillUnmount: ->
+    @serverRequest.abort()
 
   categories: ->
     categories = []
@@ -60,27 +73,34 @@
   render: ->
     React.DOM.div
       className: 'items'
-      React.createElement ItemsFilters,
-        filterData: @state.filterData,
-        handleFilterChange: @handleFilterChange,
-        allowedCategories: @categories()
       React.createElement "p", null,
         "#{Helpers.convertWeight(@totalGrams(), "kilograms")} kg"
       React.createElement "p", null,
         "#{Helpers.convertWeight(@totalGrams(), "pounds")} pounds"
-      React.DOM.table
-        className: 'table table-bordered'
-        React.DOM.thead null,
-          React.DOM.tr null,
-            React.DOM.th null, 'Name'
-            React.DOM.th null, 'Weight (Grams)'
-            React.DOM.th null, 'Category'
-            React.DOM.th null, 'Owned?'
-            React.DOM.th null, 'Actions'
-        React.DOM.tbody null,
-          for item in @filteredItems()
-            if item.id == @state.editingItemId
-              React.createElement ItemForm, key: item.id, handleUpdateItem: @updateItem, item: item, handleCancelEditing: @cancelEditing
-            else
-              React.createElement Item, key: item.id, item: item, handleDeleteItem: @deleteItem, handleEditItem: @setEditing
-          React.createElement ItemForm, handleNewItem: @addItem
+      React.DOM.div
+        className: 'col-md-2'
+        React.createElement ItemsFilters,
+          filterData: @state.filterData,
+          handleFilterChange: @handleFilterChange,
+          allowedCategories: @categories()
+      React.DOM.div
+        className: 'col-md-10'
+        if @state.loading
+          React.createElement "p", null, "Loading gear..."
+        else
+          React.DOM.table
+            className: 'table table-bordered'
+            React.DOM.thead null,
+              React.DOM.tr null,
+                React.DOM.th null, 'Name'
+                React.DOM.th null, 'Weight (Grams)'
+                React.DOM.th null, 'Category'
+                React.DOM.th null, 'Owned?'
+                React.DOM.th null, 'Actions'
+            React.DOM.tbody null,
+              for item in @filteredItems()
+                if item.id == @state.editingItemId
+                  React.createElement ItemForm, key: item.id, handleUpdateItem: @updateItem, item: item, handleCancelEditing: @cancelEditing
+                else
+                  React.createElement Item, key: item.id, item: item, handleDeleteItem: @deleteItem, handleEditItem: @setEditing
+              React.createElement ItemForm, handleNewItem: @addItem
