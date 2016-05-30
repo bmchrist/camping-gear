@@ -2,7 +2,6 @@ Mixins = {}
 window.Mixins = Mixins
 
 Mixins.AjaxLoader = {
-  # TODO make sure loading: true was initially set
   componentWillMount: ->
     @setState(loading: true)
 

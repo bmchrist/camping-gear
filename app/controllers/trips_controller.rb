@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   def index
-    @trips= Trip.all.order(:created_at)
+    @trips = Trip.all.order(:created_at)
 
     render json: @trips
   end
@@ -14,21 +14,6 @@ class TripsController < ApplicationController
       render json: @trip.errors, status: :unprocessable_entity
     end
   end
-
-  # def update
-    # @item = Item.find(params[:id])
-    # if @item.update(item_params)
-      # render json: @item
-    # else
-      # render json: @item.errors, status: :unprocessable_entity
-    # end
-  # end
-
-  # def destroy
-    # @item = Item.find(params[:id])
-    # @item.destroy
-    # head :no_content
-  # end
 
 private
 
