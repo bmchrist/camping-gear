@@ -36,3 +36,17 @@
         onClick: => @props.handleNavClick(GearList)
         React.DOM.a null,
           'Gear List'
+
+$(document).ready ->
+  Router = ReactRouter.Router
+  browserHistory = ReactRouter.browserHistory
+  Route = ReactRouter.Route
+
+  ReactDOM.render(
+    React.createElement Router,
+      history: browserHistory,
+      React.createElement Route,
+        path: "/",
+        component: Dashboard
+    document.getElementById("container")
+  )
