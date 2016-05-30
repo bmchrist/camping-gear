@@ -1,4 +1,4 @@
-@Items = React.createClass
+@GearList = React.createClass
   getInitialState: ->
     loading: true
     items: []
