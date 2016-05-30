@@ -9,12 +9,13 @@
 
   handleCancel: (e) ->
     e.preventDefault()
-    @props.setCurrentComponent(Trips)
+    browserHistory.push('/app/trips')
 
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '/trips', { trip: @state }, (data) =>
-      @props.setCurrentComponent(Trip, { trip: data })
+      # TODO
+      null
     , 'JSON'
 
   render: ->

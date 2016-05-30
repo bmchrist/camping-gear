@@ -2,6 +2,7 @@
   render: ->
     React.DOM.div null,
       React.DOM.a
-        onClick: => @props.setCurrentComponent(Trips)
-        '< Back'
+        React.createElement ReactRouter.Link,
+          to: "/app/trips"
+          '< Back'
       React.DOM.p null, @props.trip.name
