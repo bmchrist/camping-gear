@@ -1,6 +1,7 @@
 @GearList = React.createClass
   mixins: [Mixins.AjaxLoader]
   ajaxLoaderResultsVariable: "items"
+  source: "/items"
 
   getInitialState: ->
     items: []

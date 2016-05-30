@@ -1,19 +1,22 @@
 @Dashboard = React.createClass
   getInitialState: ->
-    currentComponent: 'Trips'
+    currentComponent: Trips
+    propsForComponent: {}
 
-  setCurrentComponent: (component) ->
-    @setState currentComponent: component
+  setCurrentComponent: (component, props) ->
+    @setState
+      currentComponent: component
+      propsForComponent: props
 
   render: ->
     React.DOM.div
       className: 'dashboard'
       React.createElement DashboardNav, handleNavClick: @setCurrentComponent, currentComponent: @state.currentComponent
 
-      if @state.currentComponent == 'GearList'
-        React.createElement GearList, source: @props.items_source
-      else if @state.currentComponent == 'Trips'
-        React.createElement Trips, source: @props.trips_source
+      if @state.currentComponent
+        componentProps = { setCurrentComponent: @setCurrentComponent}
+        $.extend(componentProps, @state.propsForComponent)
+        React.createElement @state.currentComponent, componentProps
       else
         console.error("No component selected on dash")
 
@@ -24,12 +27,12 @@
       React.DOM.li
         className: if @props.currentComponent == 'Trips' then 'active' else ''
         role: 'navigation'
-        onClick: => @props.handleNavClick('Trips')
+        onClick: => @props.handleNavClick(Trips)
         React.DOM.a null,
           'Trips'
       React.DOM.li
         className: if @props.currentComponent == 'GearList' then 'active' else ''
         role: 'navigation'
-        onClick: => @props.handleNavClick('GearList')
+        onClick: => @props.handleNavClick(GearList)
         React.DOM.a null,
           'Gear List'

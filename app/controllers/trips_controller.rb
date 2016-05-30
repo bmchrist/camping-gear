@@ -4,17 +4,16 @@ class TripsController < ApplicationController
 
     render json: @trips
   end
-end
 
-  # def create
-    # @item = Item.new(item_params)
+  def create
+    @trip = Trip.new(trip_params)
 
-    # if @item.save
-      # render json: @item
-    # else
-      # render json: @item.errors, status: :unprocessable_entity
-    # end
-  # end
+    if @trip.save
+      render json: @trip
+    else
+      render json: @trip.errors, status: :unprocessable_entity
+    end
+  end
 
   # def update
     # @item = Item.find(params[:id])
@@ -31,10 +30,9 @@ end
     # head :no_content
   # end
 
-# private
+private
 
-  # def item_params
-    # params.require(:item).permit(:name, :grams, :owned, :category)
-  # end
-# end
-
+  def trip_params
+    params.require(:trip).permit(:name)
+  end
+end
