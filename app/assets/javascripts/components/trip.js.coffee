@@ -5,4 +5,4 @@
         React.createElement ReactRouter.Link,
           to: "/app/trips"
           '< Back'
-      React.DOM.p null, @props.trip.name
+      React.DOM.p null, @props.params.id

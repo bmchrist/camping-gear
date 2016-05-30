@@ -39,8 +39,8 @@
   render: ->
     React.DOM.tr null,
       React.DOM.td null,
-        React.DOM.a
-          #onClick: => @props.setCurrentComponent(Trip, { trip: @props.trip })
+        React.createElement ReactRouter.Link,
+          to: "/app/trips/#{@props.trip.id}"
           @props.trip.name
       React.DOM.td null, @props.trip.start_date || "N/A"
       React.DOM.td null, @props.trip.end_date || "N/A"
