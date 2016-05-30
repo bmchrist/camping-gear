@@ -1,6 +1,6 @@
 @Dashboard = React.createClass
   getInitialState: ->
-    currentComponent: 'GearList'
+    currentComponent: 'Trips'
 
   navigateGearList: ->
     @setState currentComponent: 'GearList'
@@ -28,6 +28,6 @@
       if @state.currentComponent == 'GearList'
         React.createElement GearList, source: @props.items_source
       else if @state.currentComponent == 'Trips'
-        # TODO: this
+        React.createElement Trips, source: @props.trips_source
       else
         console.error("No component selected on dash")
