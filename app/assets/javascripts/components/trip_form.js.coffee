@@ -14,8 +14,7 @@
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '/trips', { trip: @state }, (data) =>
-      # TODO
-      null
+      browserHistory.push("/app/trips/#{data.id}")
     , 'JSON'
 
   render: ->

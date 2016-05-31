@@ -77,7 +77,7 @@
           React.createElement "p", null, "Loading gear..."
         else
           React.DOM.table
-            className: 'table table-bordered'
+            className: 'table table-condensed'
             React.DOM.thead null,
               React.DOM.tr null,
                 React.DOM.th null, 'Name'
