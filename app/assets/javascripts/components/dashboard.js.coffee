@@ -13,15 +13,15 @@
     React.DOM.ul
       className: 'nav nav-tabs'
       React.DOM.li
-        className: if window.location.pathname == '/app/trips' then 'active' else ''
         role: 'navigation'
         React.createElement ReactRouter.Link,
+          activeClassName: "active"
           to: "/app/trips"
           'Trips'
       React.DOM.li
-        className: if window.location.pathname == '/app/gear' then 'active' else ''
         role: 'navigation'
         React.createElement ReactRouter.Link,
+          activeClassName: "active"
           to: "/app/gear"
           'Gear List'
 

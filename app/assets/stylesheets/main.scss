@@ -1,3 +1,15 @@
+// Hacky crap to let the active state be on a instead of on li
+.nav-tabs > li > a.active,
+.nav-tabs > li > a:hover.active,
+.nav-tabs > li > a:focus.active {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+// End hacky crap to let the active state be on a instead of on li
+
 .margin-bottom {
   margin-bottom: 10px;
 }
