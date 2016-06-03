@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require react
+//= require react_router
 //= require_tree ./core
 //= require components
 //= require bootstrap-sprockets

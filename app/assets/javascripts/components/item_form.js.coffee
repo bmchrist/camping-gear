@@ -1,4 +1,15 @@
 @ItemForm = React.createClass
+  propTypes:
+    # TODO: clean up naming of these
+    handleUpdateItem: React.PropTypes.func,
+    handleNewItem: React.PropTypes.func,
+    handleCancelEditing: React.PropTypes.func,
+    item: React.PropTypes.shape
+      name: React.PropTypes.string,
+      grams: React.PropTypes.number,
+      owned: React.PropTypes.bool,
+      category: React.PropTypes.string
+
   getInitialState: ->
     id: @props.item.id
     name: @props.item.name || ''

@@ -1,4 +1,11 @@
 @ItemsFilters = React.createClass
+  propTypes:
+    handleFilterChange: React.PropTypes.func,
+    allowedCategories: ReactPropTypes.arrayOf(React.PropTypes.string)
+    filterData: ReactPropTypes.shape
+      category: React.PropTypes.string,
+      ownedOnly: React.PropTypes.ownedOnly
+
   getDefaultProps: ->
     filterData: {
       ownedOnly: true

@@ -1,7 +1,4 @@
 @Dashboard = React.createClass
-  getInitialState: ->
-    propsForComponent: {}
-
   render: ->
     React.DOM.div
       className: 'dashboard'

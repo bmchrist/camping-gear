@@ -1,4 +1,8 @@
 @Trip = React.createClass
+  propTypes:
+    params: React.PropTypes.shape # Via the Router/URI
+      id: React.PropTypes.number.isRequired
+
   render: ->
     React.DOM.div null,
       React.DOM.a
