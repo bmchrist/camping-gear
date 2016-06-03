@@ -1,3 +1,4 @@
+# TODO: switch to ES6 instead of mixins
 Mixins = {}
 window.Mixins = Mixins
 
@@ -12,7 +13,7 @@ Mixins.AjaxLoader = {
       console.error("Must define source")
 
     # TODO: one day have this check cache and only load if cache is outdated
-    @serverRequest = $.getJSON(@source, (results) =>
+    @serverRequest = $.getJSON(@source(), (results) =>
       state = { loading: false }
       state[@ajaxLoaderResultsVariable] = results
       @setState(state)

@@ -1,7 +1,7 @@
 @Trips = React.createClass
   mixins: [Mixins.AjaxLoader]
   ajaxLoaderResultsVariable: "trips"
-  source: "/trips"
+  source: -> "/trips"
 
   getInitialState: ->
     trips: []

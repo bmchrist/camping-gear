@@ -52,7 +52,7 @@ $(document).ready ->
           React.createElement Route,
             key: "trip"
             path: "/app/trips/:id",
-            component: Trip
+            component: TripContainer
         ]
     document.getElementById("container")
   )
