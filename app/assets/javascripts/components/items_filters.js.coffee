@@ -1,4 +1,11 @@
 @ItemsFilters = React.createClass
+  propTypes:
+    handleFilterChange: React.PropTypes.func,
+    allowedCategories: React.PropTypes.arrayOf(React.PropTypes.string)
+    filterData: React.PropTypes.shape
+      category: React.PropTypes.string,
+      ownedOnly: React.PropTypes.ownedOnly
+
   getDefaultProps: ->
     filterData: {
       ownedOnly: true
@@ -15,12 +22,14 @@
 
   render: ->
     React.DOM.div
-      className: 'well items__filter-box'
+      className: 'well'
       React.DOM.label
         htmlFor: "items-filter-category"
         'Category'
       React.DOM.select
-        className: 'form-control items__category-filter margin-bottom'
+        className: 'form-control'
+        style:
+          marginBottom: 10
         id: "items-filter-category"
         name: 'category'
         defaultValue: @props.filterData.category

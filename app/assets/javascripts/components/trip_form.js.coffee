@@ -1,4 +1,7 @@
 @TripForm = React.createClass
+  contextTypes:
+    router: React.PropTypes.object
+
   getInitialState: ->
     name: ""
     start_date: ""
@@ -9,12 +12,12 @@
 
   handleCancel: (e) ->
     e.preventDefault()
-    @props.setCurrentComponent(Trips)
+    @context.router.push('/app/trips')
 
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '/trips', { trip: @state }, (data) =>
-      @props.setCurrentComponent(Trip, { trip: data })
+      @context.router.push("/app/trips/#{data.id}")
     , 'JSON'
 
   render: ->

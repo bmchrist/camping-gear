@@ -1,7 +1,7 @@
 @GearList = React.createClass
   mixins: [Mixins.AjaxLoader]
   ajaxLoaderResultsVariable: "items"
-  source: "/items"
+  source: -> "/items"
 
   getInitialState: ->
     items: []
@@ -47,10 +47,10 @@
     items.splice index, 1
     @setState items: items
 
-  updateItem: (props) ->
+  updateItem: (params) ->
     items = @state.items.slice()
-    index = items.indexOf props.original
-    items[index] = props.new
+    index = items.indexOf params.original
+    items[index] = params.new
     @setState editingItemId: null, items: items
 
   handleFilterChange: (filter, value) ->
@@ -77,7 +77,7 @@
           React.createElement "p", null, "Loading gear..."
         else
           React.DOM.table
-            className: 'table table-bordered'
+            className: 'table table-condensed'
             React.DOM.thead null,
               React.DOM.tr null,
                 React.DOM.th null, 'Name'

@@ -1,11 +1,18 @@
 @Item = React.createClass
-  handleEdit: (e) ->
+  propTypes:
+    handleEditItem: React.PropTypes.func,
+    handleDeleteItemEditing: React.PropTypes.func,
+    item: React.PropTypes.shape
+      id: React.PropTypes.number.isRequired,
+      name: React.PropTypes.string,
+      grams: React.PropTypes.number,
+      owned: React.PropTypes.bool,
+      category: React.PropTypes.string
+
+  handleEditClick: (e) ->
     @props.handleEditItem @props.item
 
-  handleCancel: (e) ->
-    @props.handleCancelEditing()
-
-  handleDelete: (e) ->
+  handleDeleteClick: (e) ->
     e.preventDefault()
     if confirm("Are you sure you want to delete this?")
       $.ajax
@@ -25,9 +32,9 @@
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-danger'
-          onClick: @handleDelete
+          onClick: @handleDeleteClick
           'Delete'
         React.DOM.a
           className: 'btn btn-primary'
-          onClick: @handleEdit
+          onClick: @handleEditClick
           'Edit'
